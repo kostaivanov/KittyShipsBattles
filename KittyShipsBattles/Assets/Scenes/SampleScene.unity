@@ -539,10 +539,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac8aaf5db046b043bc4e9e73727c0e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunTip: {fileID: 212043711}
-  bullet: {fileID: 8342744059376265277, guid: ca424b1abf028184a8adaa292924e329, type: 3}
-  minPower: 15
-  maxPower: 20
+  projectilePrefab: {fileID: 8342744059376265277, guid: ca424b1abf028184a8adaa292924e329, type: 3}
+  minInitialSpeed: 20
+  maxInitialSpeed: 40
+  maxDistance: 100
+  gravity: {x: 0, y: -9.81}
 --- !u!114 &1748818820
 MonoBehaviour:
   m_ObjectHideFlags: 0
