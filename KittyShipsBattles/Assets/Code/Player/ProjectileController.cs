@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {
     public GameObject projectilePrefab;
+    [SerializeField] private GameObject muzzle;
     public float minInitialSpeed = 5f;
     public float maxInitialSpeed = 20f;
     public float maxDistance = 100f;
@@ -42,7 +43,7 @@ public class ProjectileController : MonoBehaviour
             velocity = (initialMousePosition - mousePosition).normalized * initialSpeed;
 
             // Instantiate projectile and set its initial position and velocity
-            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            GameObject projectile = Instantiate(projectilePrefab, muzzle.transform.position, Quaternion.identity);
             projectile.GetComponent<Projectile>().Initialize(velocity, maxDistance, gravity);
 
             // Reset dragging state

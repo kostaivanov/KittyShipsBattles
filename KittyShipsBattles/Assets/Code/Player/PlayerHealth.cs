@@ -10,6 +10,14 @@ internal class PlayerHealth : PlayerComponents
         base.Start();
     }
 
+    private void OnTriggerEnter2D(Collider2D otherObject)
+    {
+        Debug.Log("Hit the target!");
+        if (otherObject.CompareTag("Projectile"))
+        {
+            otherObject.gameObject.SetActive(false);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
