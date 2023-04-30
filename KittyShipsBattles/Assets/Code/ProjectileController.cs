@@ -13,6 +13,13 @@ public class ProjectileController : MonoBehaviour
     private Vector2 velocity;
     private bool isDragging = false;
 
+    private TrajectoryLine trajectoryLine;
+
+    private void Start()
+    {
+        trajectoryLine = GetComponent<TrajectoryLine>();
+    }
+
     void Update()
     {
         // Get mouse position in world coordinates
@@ -40,6 +47,13 @@ public class ProjectileController : MonoBehaviour
 
             // Reset dragging state
             isDragging = false;
+            trajectoryLine.EndLine();
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            Vector3 currentPoint = mousePosition;
+            trajectoryLine.RenderLine(initialMousePosition, currentPoint);
         }
     }
 }
