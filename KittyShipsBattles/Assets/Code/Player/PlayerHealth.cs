@@ -6,6 +6,8 @@ internal class PlayerHealth : PlayerComponents
 {
     private Projectile projectile;
 
+    internal float healthPoints = 50;
+
     private void Awake()
     {
         projectile = GetComponent<Projectile>();
@@ -20,8 +22,8 @@ internal class PlayerHealth : PlayerComponents
     private void OnTriggerEnter2D(Collider2D otherObject)
     {
         Projectile projectile = otherObject.GetComponent<Projectile>();
-        Debug.Log("Hit the target!");
-        if (projectile != null && otherObject.gameObject == projectile.shootingPlayer)
+
+        if (projectile != null && this.gameObject == projectile.shootingPlayer)
         {
             return;
         }
@@ -29,6 +31,13 @@ internal class PlayerHealth : PlayerComponents
         if (otherObject.CompareTag("Projectile"))
         {
             otherObject.gameObject.SetActive(false);
+            healthPoints -= 10;
+            Debug.Log("Health points = " + healthPoints);
+
+            if (healthPoints == 0)
+            {
+                GetComponent<SpriteRenderer>().enabled = false;
+            }
         }
     }
     // Update is called once per frame
