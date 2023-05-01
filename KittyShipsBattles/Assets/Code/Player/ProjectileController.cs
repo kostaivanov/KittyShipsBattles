@@ -21,6 +21,7 @@ public class ProjectileController : MonoBehaviour
         trajectoryLine = GetComponent<TrajectoryLine>();
     }
 
+
     void Update()
     {
         // Get mouse position in world coordinates
@@ -44,6 +45,11 @@ public class ProjectileController : MonoBehaviour
 
             // Instantiate projectile and set its initial position and velocity
             GameObject projectile = Instantiate(projectilePrefab, muzzle.transform.position, Quaternion.identity);
+
+            //Set the shooting palyer reference on the projectile
+            //projectile.GetComponent<Projectile>().SetShootingPlayer(this.gameObject);
+            projectile.GetComponent<Projectile>().shootingPlayer = this.gameObject;
+
             projectile.GetComponent<Projectile>().Initialize(velocity, maxDistance, gravity);
 
             // Reset dragging state

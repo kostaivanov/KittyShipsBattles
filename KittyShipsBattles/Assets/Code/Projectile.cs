@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+internal class Projectile : MonoBehaviour
 {
     private Vector2 velocity;
     private float maxDistance;
@@ -10,12 +10,19 @@ public class Projectile : MonoBehaviour
     private Vector2 gravity;
     public float dragCoefficient = 0.1f;
 
-    public void Initialize(Vector2 initialVelocity, float distance, Vector2 gravityVector)
+    internal GameObject shootingPlayer;
+
+    internal void Initialize(Vector2 initialVelocity, float distance, Vector2 gravityVector)
     {
         velocity = initialVelocity;
         maxDistance = distance;
         startPosition = transform.position;
         gravity = gravityVector;
+    }
+
+    internal void SetShootingPlayer(GameObject player)
+    {
+        shootingPlayer = player;
     }
 
     void Update()
