@@ -468,12 +468,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1748818818}
   - component: {fileID: 1748818817}
+  - component: {fileID: 1748818821}
+  - component: {fileID: 1748818824}
+  - component: {fileID: 1748818823}
   - component: {fileID: 1748818820}
   - component: {fileID: 1748818819}
-  - component: {fileID: 1748818821}
   - component: {fileID: 1748818822}
-  - component: {fileID: 1748818823}
-  - component: {fileID: 1748818824}
   - component: {fileID: 1748818825}
   m_Layer: 0
   m_Name: Ship_2
