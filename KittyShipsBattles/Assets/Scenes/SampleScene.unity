@@ -590,8 +590,8 @@ MonoBehaviour:
   maxInitialSpeed: 40
   maxDistance: 30
   gravity: {x: 0, y: -9.81}
-  maxClickDuration: 0.25
-  minDragDistance: 1
+  maxClickDuration: 0.1
+  minDragDistance: 0.5
 --- !u!114 &1748818820
 MonoBehaviour:
   m_ObjectHideFlags: 0

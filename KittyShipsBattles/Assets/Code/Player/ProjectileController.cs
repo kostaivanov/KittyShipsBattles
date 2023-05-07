@@ -6,10 +6,10 @@ public class ProjectileController : MonoBehaviour
 {
     public GameObject projectilePrefab;
     [SerializeField] private GameObject muzzle;
-    public float minInitialSpeed = 5f;
-    public float maxInitialSpeed = 20f;
-    public float maxDistance = 100f;
-    public Vector2 gravity = new Vector2(0, -9.81f);
+    [SerializeField] private float minInitialSpeed;
+    [SerializeField] private float maxInitialSpeed;
+    [SerializeField] private float maxDistance;
+    [SerializeField] private Vector2 gravity = new Vector2(0, -9.81f);
     private Vector3 initialMousePosition;
     private Vector2 velocity;
     private bool isDragging = false;
@@ -32,10 +32,13 @@ public class ProjectileController : MonoBehaviour
 
     void Update()
     {
+        // Get mouse position in world coordinates
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         // Detect mouse button press and start dragging
         if (Input.GetMouseButtonDown(0))
         {
-            initialMousePosition = Input.mousePosition;
+            initialMousePosition = mousePosition;
             isDragging = true;
             mouseDownTime = Time.time;
         }
@@ -43,30 +46,41 @@ public class ProjectileController : MonoBehaviour
         else if (Input.GetMouseButtonUp(0) && isDragging)
         {
             float clickDuration = Time.time - mouseDownTime;
-            Vector3 mouseUpPosition = Input.mousePosition;
-            float dragDistance = Vector2.Distance(initialMousePosition, mouseUpPosition);
+            //Vector3 mouseUpPosition = Input.mousePosition;
+            Vector3 clickedWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            clickedWorldPosition.z = 0;
+
+            float dragDistance = Vector2.Distance(initialMousePosition, clickedWorldPosition);
 
             // Calculate shooting power based on the mouse movement
             float shootingPower = Mathf.Clamp01(dragDistance / maxDistance);
             float initialSpeed = Mathf.Lerp(minInitialSpeed, maxInitialSpeed, shootingPower);
 
             // Get mouse position in world coordinates
-            Vector3 clickedWorldPosition = mainCamera.ScreenToWorldPoint(mouseUpPosition);
-            clickedWorldPosition.z = 0;
+            Debug.Log("mouseDownTime: " + mouseDownTime);
+            Debug.Log("Time.time: " + Time.time);
+            Debug.Log("clickDuration: " + clickDuration);
+            Debug.Log("drag distance: " + dragDistance);
+            Debug.Log("minDragDistance " + minDragDistance);
 
             Vector3 viewportPosition = mainCamera.WorldToViewportPoint(clickedWorldPosition);
 
-            Debug.Log("Shooting power - " + shootingPower);
-            if (clickDuration < maxClickDuration && dragDistance < minDragDistance / maxDistance &&
+            //Debug.Log("Distance between start point and last point of the mouse: " + Vector2.Distance(initialMousePosition, mousePosition));
+            //Debug.Log("max Distance: " + maxDistance);
+            //Debug.Log("shootingPower: " + shootingPower);
+            //Debug.Log("Mathf.Lerp of initialSpeed: " + initialSpeed);
+            
+            if (clickDuration < maxClickDuration && dragDistance < minDragDistance &&
             viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1)
             {
+                Debug.Log("Entering?");
                 // Move player to the clicked position
-                playerMovement.MovePlayer();
+                playerMovement.MovePlayer(clickedWorldPosition);
             }
             else
             {
                 // Shoot the projectile
-                ShootProjectile(mouseUpPosition, initialSpeed);
+                ShootProjectile(clickedWorldPosition, initialSpeed);
             }
 
             isDragging = false;
@@ -75,12 +89,8 @@ public class ProjectileController : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            Vector3 currentPoint = Input.mousePosition;
-            Vector3 initialWorldPosition = mainCamera.ScreenToWorldPoint(initialMousePosition);
-            initialWorldPosition.z = 0;
-            Vector3 currentWorldPosition = mainCamera.ScreenToWorldPoint(currentPoint);
-            currentWorldPosition.z = 0;
-            trajectoryLine.RenderLine(initialWorldPosition, currentWorldPosition);
+            Vector3 currentPoint = mousePosition;
+            trajectoryLine.RenderLine(initialMousePosition, mousePosition);
         }
     }
 
