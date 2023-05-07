@@ -6,7 +6,6 @@ using UnityEngine;
 internal class PlayerMovement : PlayerComponents
 {
     [SerializeField] internal float moveSpeed;
-    [SerializeField] private float maxCLickDuration = 0.25f; // Maximum time the mouse button can be held down for a click to be registered
     private Coroutine movingCoroutine;
     private Vector3 targetPosition;
 
@@ -18,7 +17,7 @@ internal class PlayerMovement : PlayerComponents
         //targetPosition = transform.position;
     }
 
-    internal void MovePlayer(Vector3 targetPosition)
+    protected internal void MovePlayer(Vector3 targetPosition)
     {
         if (movingCoroutine != null)
         {

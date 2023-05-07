@@ -5,6 +5,7 @@ using UnityEngine;
 internal class PlayerHealth : PlayerComponents
 {
     private Projectile projectile;
+    [SerializeField] private ShipManager shipManager;
 
     internal float healthPoints = 50;
 
@@ -28,6 +29,11 @@ internal class PlayerHealth : PlayerComponents
             return;
         }
 
+        if (!shipManager.IsValidTarget(projectile.shootingPlayer, this.gameObject))
+        {
+            return;
+        }
+
         if (otherObject.CompareTag("Projectile"))
         {
             otherObject.gameObject.SetActive(false);
@@ -39,10 +45,5 @@ internal class PlayerHealth : PlayerComponents
                 GetComponent<SpriteRenderer>().enabled = false;
             }
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

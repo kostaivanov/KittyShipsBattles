@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileController : MonoBehaviour
+internal class ProjectileController : MonoBehaviour
 {
-    public GameObject projectilePrefab;
+    [SerializeField] private GameObject projectilePrefab;
+
     [SerializeField] private GameObject muzzle;
     [SerializeField] private float minInitialSpeed;
     [SerializeField] private float maxInitialSpeed;
@@ -56,13 +57,13 @@ public class ProjectileController : MonoBehaviour
             float shootingPower = Mathf.Clamp01(dragDistance / maxDistance);
             float initialSpeed = Mathf.Lerp(minInitialSpeed, maxInitialSpeed, shootingPower);
 
-            // Get mouse position in world coordinates
-            Debug.Log("mouseDownTime: " + mouseDownTime);
-            Debug.Log("Time.time: " + Time.time);
-            Debug.Log("clickDuration: " + clickDuration);
-            Debug.Log("drag distance: " + dragDistance);
-            Debug.Log("minDragDistance " + minDragDistance);
+            //Debug.Log("mouseDownTime: " + mouseDownTime);
+            //Debug.Log("Time.time: " + Time.time);
+            //Debug.Log("clickDuration: " + clickDuration);
+            //Debug.Log("drag distance: " + dragDistance);
+            //Debug.Log("minDragDistance " + minDragDistance);
 
+            // Get mouse position in world coordinates
             Vector3 viewportPosition = mainCamera.WorldToViewportPoint(clickedWorldPosition);
 
             //Debug.Log("Distance between start point and last point of the mouse: " + Vector2.Distance(initialMousePosition, mousePosition));

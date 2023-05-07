@@ -123,6 +123,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &203032521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 203032523}
+  - component: {fileID: 203032522}
+  m_Layer: 0
+  m_Name: _ShipManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &203032522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203032521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70abbbe3aa307ff46bc764900ccd0880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yAxisTolerance: 1
+--- !u!4 &203032523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203032521}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &212043710
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +281,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -333,12 +378,12 @@ GameObject:
   - component: {fileID: 1622567637}
   - component: {fileID: 1622567636}
   - component: {fileID: 1622567639}
-  - component: {fileID: 1622567638}
   - component: {fileID: 1622567640}
   - component: {fileID: 1622567641}
+  - component: {fileID: 1622567638}
   m_Layer: 0
   m_Name: Ship_1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -408,7 +453,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1622567638
 MonoBehaviour:
@@ -422,6 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935c037ee1ea3e9429688c3f4f36d604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipManager: {fileID: 203032522}
 --- !u!70 &1622567639
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -435,8 +481,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.068575144, y: 0.28474054}
-  m_Size: {x: 0.41361094, y: 0.641656}
+  m_Offset: {x: -0.074199915, y: -0.38647327}
+  m_Size: {x: 0.6948457, y: 0.97163826}
   m_Direction: 0
 --- !u!50 &1622567640
 Rigidbody2D:
@@ -499,7 +545,7 @@ GameObject:
   - component: {fileID: 1748818826}
   m_Layer: 0
   m_Name: Ship_2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -570,7 +616,7 @@ Transform:
   m_Children:
   - {fileID: 212043711}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1748818819
 MonoBehaviour:
@@ -604,6 +650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935c037ee1ea3e9429688c3f4f36d604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipManager: {fileID: 203032522}
 --- !u!120 &1748818821
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -736,8 +783,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03428042, y: 0.26362902}
-  m_Size: {x: 0.4259131, y: 0.63603437}
+  m_Offset: {x: 0.041980267, y: -0.36968347}
+  m_Size: {x: 0.6261091, y: 0.97097784}
   m_Direction: 0
 --- !u!50 &1748818824
 Rigidbody2D:
@@ -773,7 +820,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  maxCLickDuration: 0.25
 --- !u!95 &1748818826
 Animator:
   serializedVersion: 4
