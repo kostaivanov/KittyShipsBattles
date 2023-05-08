@@ -5,6 +5,7 @@ using UnityEngine;
 
 internal class PlayerMovement : PlayerComponents
 {
+    [SerializeField] internal GameObject highlightEffect;
     [SerializeField] internal float moveSpeed;
     private Coroutine movingCoroutine;
     private Vector3 targetPosition;
@@ -43,5 +44,12 @@ internal class PlayerMovement : PlayerComponents
 
         // Clear the moving coroutine reference
         movingCoroutine = null;
+    }
+    internal void Sethighlight(bool active)
+    {
+        if (highlightEffect != null)
+        {
+            highlightEffect.SetActive(active);
+        }
     }
 }

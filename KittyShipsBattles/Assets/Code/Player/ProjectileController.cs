@@ -17,7 +17,8 @@ internal class ProjectileController : MonoBehaviour
 
     private TrajectoryLine trajectoryLine;
 
-    private PlayerMovement playerMovement;
+    private List<PlayerMovement> playerMovements;
+    private PlayerMovement selectedPlayer;
     private Camera mainCamera;
     private float mouseDownTime;
     [SerializeField] private float maxClickDuration; // Maximum time the mouse button can be held down for a click to be registered
@@ -27,12 +28,54 @@ internal class ProjectileController : MonoBehaviour
     {
         mainCamera = Camera.main;
         trajectoryLine = GetComponent<TrajectoryLine>();
-        playerMovement = GetComponent<PlayerMovement>();
+
+        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+        playerMovements = new List<PlayerMovement>();
+        foreach (var playerObject in playerObjects)
+        {
+            playerMovements.Add(playerObject.GetComponent<PlayerMovement>());
+            Debug.Log(playerObject.name);
+        }
+
+        if (playerMovements.Count > 0)
+        {
+            selectedPlayer = playerMovements[0];
+        }
     }
 
 
     void Update()
     {
+        //Handle player seleciton and highlighting
+        RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        if (hit.collider != null)
+        {
+            PlayerMovement hitPlayer = hit.collider.GetComponent<PlayerMovement>();
+            if (hitPlayer != null)
+            {
+                hitPlayer.Sethighlight(true);
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    selectedPlayer = hitPlayer;
+                }
+            }
+            else
+            {
+                foreach (var player in playerMovements)
+                {
+                    player.Sethighlight(false);
+                }
+            }
+        }
+        else
+        {
+            foreach (var player in playerMovements)
+            {
+                player.Sethighlight(false);
+            }
+        }
+
         // Get mouse position in world coordinates
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -76,7 +119,7 @@ internal class ProjectileController : MonoBehaviour
             {
                 Debug.Log("Entering?");
                 // Move player to the clicked position
-                playerMovement.MovePlayer(clickedWorldPosition);
+                selectedPlayer.MovePlayer(clickedWorldPosition);
             }
             else
             {
