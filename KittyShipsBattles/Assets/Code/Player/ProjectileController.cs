@@ -46,36 +46,7 @@ internal class ProjectileController : MonoBehaviour
 
     void Update()
     {
-        //Handle player seleciton and highlighting
-        RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        if (hit.collider != null)
-        {
-            PlayerMovement hitPlayer = hit.collider.GetComponent<PlayerMovement>();
-            if (hitPlayer != null)
-            {
-                hitPlayer.Sethighlight(true);
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    selectedPlayer = hitPlayer;
-                    Debug.Log("selectedPlayer = " + selectedPlayer.name);
-                }
-            }
-            else
-            {
-                foreach (var player in playerMovements)
-                {
-                    player.Sethighlight(false);
-                }
-            }
-        }
-        else
-        {
-            foreach (var player in playerMovements)
-            {
-                player.Sethighlight(false);
-            }
-        }
+       
 
         // Get mouse position in world coordinates
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

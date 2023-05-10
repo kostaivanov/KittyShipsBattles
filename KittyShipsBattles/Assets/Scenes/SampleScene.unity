@@ -303,6 +303,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5982727304974120509, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
+      propertyPath: shipManager
+      value: 
+      objectReference: {fileID: 203032522}
     - target: {fileID: 5982727304974120646, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
       propertyPath: m_Name
       value: Ship_L2
@@ -602,6 +606,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5982727304974120509, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
+      propertyPath: shipManager
+      value: 
+      objectReference: {fileID: 203032522}
     - target: {fileID: 5982727304974120646, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
       propertyPath: m_Name
       value: Ship_L3

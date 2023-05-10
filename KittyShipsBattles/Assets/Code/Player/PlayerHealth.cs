@@ -23,15 +23,12 @@ internal class PlayerHealth : PlayerComponents
     private void OnTriggerEnter2D(Collider2D otherObject)
     {
         Projectile projectile = otherObject.GetComponent<Projectile>();
-
-        if (projectile != null && this.gameObject == projectile.shootingPlayer)
+        if (projectile != null)
         {
-            return;
-        }
-
-        if (!shipManager.IsValidTarget(projectile.shootingPlayer, this.gameObject))
-        {
-            return;
+            if (this.gameObject == projectile.shootingPlayer || !shipManager.IsValidTarget(projectile.shootingPlayer, this.gameObject) || this.gameObject.transform.position.x < 0)
+            {
+                return;
+            }
         }
 
         if (otherObject.CompareTag("Projectile"))
