@@ -58,6 +58,7 @@ internal class ProjectileController : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     selectedPlayer = hitPlayer;
+                    Debug.Log("selectedPlayer = " + selectedPlayer.name);
                 }
             }
             else
