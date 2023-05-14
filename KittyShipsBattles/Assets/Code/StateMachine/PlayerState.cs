@@ -1,7 +1,7 @@
 internal enum PlayerState
 {
     moving,
-    shootin,
+    shooting,
     selected,
     dragging,
 }
