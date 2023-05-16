@@ -54,10 +54,7 @@ internal class ProjectileController : MonoBehaviour
             clickedWorldPosition.z = 0;
 
             float dragDistance = Vector2.Distance(initialMousePosition, clickedWorldPosition);
-
-            // Calculate shooting power based on the mouse movement
-            float shootingPower = Mathf.Clamp01(dragDistance / maxDistance);
-            float initialSpeed = Mathf.Lerp(minInitialSpeed, maxInitialSpeed, shootingPower);
+            float initialSpeed = CalculateShootingPower(dragDistance);
 
             //Debug.Log("mouseDownTime: " + mouseDownTime);
             //Debug.Log("Time.time: " + Time.time);
@@ -72,7 +69,7 @@ internal class ProjectileController : MonoBehaviour
             //Debug.Log("max Distance: " + maxDistance);
             //Debug.Log("shootingPower: " + shootingPower);
             //Debug.Log("Mathf.Lerp of initialSpeed: " + initialSpeed);
-            
+
             if (clickDuration < maxClickDuration && dragDistance < minDragDistance &&
             viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1)
             {
@@ -97,7 +94,15 @@ internal class ProjectileController : MonoBehaviour
         }
     }
 
-    private void ShootProjectile(Vector3 mouseUpPosition, float initialSpeed)
+    internal float CalculateShootingPower(float dragDistance)
+    {
+        // Calculate shooting power based on the mouse movement
+        float shootingPower = Mathf.Clamp01(dragDistance / maxDistance);
+        float initialSpeed = Mathf.Lerp(minInitialSpeed, maxInitialSpeed, shootingPower);
+        return initialSpeed;
+    }
+
+    internal void ShootProjectile(Vector3 mouseUpPosition, float initialSpeed)
     {
         // Calculate velocity based on the mouse movement direction
         velocity = (initialMousePosition - mouseUpPosition).normalized * initialSpeed;

@@ -5,6 +5,14 @@ using UnityEngine;
 internal class PlayerStateManager : PlayerComponents
 {
     internal Camera mainCamera;
+
+    internal Vector3 initialMousePosition;
+    internal bool isDragging = false;
+    internal float mouseDownTime;
+    [SerializeField] internal float maxClickDuration; // Maximum time the mouse button can be held down for a click to be registered
+    [SerializeField] internal float minDragDistance; // Maximum time the mouse button can be held down for a click to be registered
+    internal TrajectoryLine trajectoryLine;
+
     internal ProjectileController projectileController;
 
     internal PlayerBaseState currentState;
@@ -23,6 +31,7 @@ internal class PlayerStateManager : PlayerComponents
     {
         base.Start();
         mainCamera = Camera.main;
+        trajectoryLine = GetComponent<TrajectoryLine>();
 
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
         playerMovements = new List<PlayerMovement>();
@@ -37,7 +46,7 @@ internal class PlayerStateManager : PlayerComponents
             selectedPlayer = playerMovements[0];
         }
 
-        currentState = selectedState;
+        currentState = shootingState;
         currentState.EnterState(this);
     }
 
