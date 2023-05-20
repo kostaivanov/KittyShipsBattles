@@ -41,12 +41,9 @@ internal class PlayerStateManager : PlayerComponents
         }
 
         playerMovements = new List<PlayerMovement>();
-        if (playerMovements.Count > 0)
-        {
-            selectedPlayer = playerMovements[0];
-        }
+        
 
-        currentState = shootingState;
+        currentState = selectedState;
         currentState.EnterState(this);
     }
 

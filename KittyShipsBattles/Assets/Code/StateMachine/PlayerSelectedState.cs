@@ -9,8 +9,10 @@ internal class PlayerSelectedState : PlayerBaseState
 
     internal override void EnterState(PlayerStateManager player)
     {
-
-
+        if (player.playerMovements.Count > 0)
+        {
+            player.selectedPlayer = player.playerMovements[0];
+        }
     }
 
     internal override void UpdateState(PlayerStateManager player)

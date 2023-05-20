@@ -944,6 +944,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 580179148, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
+      propertyPath: m_SortingFudge
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 580179148, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
       propertyPath: m_SortingOrder
       value: 8
       objectReference: {fileID: 0}
