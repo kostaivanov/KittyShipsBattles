@@ -5,6 +5,7 @@ using UnityEngine;
 internal class PlayerStateManager : PlayerComponents
 {
     internal Camera mainCamera;
+    [SerializeField] internal GameObject healthBar;
 
     internal Vector3 initialMousePosition;
     internal bool isDragging = false;
@@ -32,25 +33,30 @@ internal class PlayerStateManager : PlayerComponents
         base.Start();
         mainCamera = Camera.main;
         trajectoryLine = GetComponent<TrajectoryLine>();
+        healthBar.SetActive(false);
 
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
         playerMovements = new List<PlayerMovement>();
         foreach (var playerObject in playerObjects)
         {
             playerMovements.Add(playerObject.GetComponent<PlayerMovement>());
-        }
+            Debug.Log("playerMovements = " + playerMovements.Count);
 
-        playerMovements = new List<PlayerMovement>();
-        
+        }        
 
         currentState = selectedState;
         currentState.EnterState(this);
+        Debug.Log("We play? = "  + currentState);
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentState.UpdateState(this);
+        //if (selectedPlayer.gameObject.name == this.gameObject.name)
+        //{
+            currentState.UpdateState(this);
+        //}
+        Debug.Log("We play? = " + currentState);
     }
 
     internal void SwitchState(PlayerBaseState state)

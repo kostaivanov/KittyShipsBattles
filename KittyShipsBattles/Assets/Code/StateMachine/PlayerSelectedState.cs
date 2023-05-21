@@ -11,7 +11,13 @@ internal class PlayerSelectedState : PlayerBaseState
     {
         if (player.playerMovements.Count > 0)
         {
-            player.selectedPlayer = player.playerMovements[0];
+            if (player.gameObject.name == player.playerMovements[0].gameObject.name)
+            {
+                player.selectedPlayer = player.playerMovements[0];
+                player.healthBar.SetActive(true);
+                player.SwitchState(player.shootingState);
+            }
+
         }
     }
 
