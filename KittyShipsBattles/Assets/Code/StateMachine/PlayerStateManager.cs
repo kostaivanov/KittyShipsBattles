@@ -33,6 +33,7 @@ internal class PlayerStateManager : PlayerComponents
         base.Start();
         mainCamera = Camera.main;
         trajectoryLine = GetComponent<TrajectoryLine>();
+        projectileController = GetComponent<ProjectileController>();
         healthBar.SetActive(false);
 
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");

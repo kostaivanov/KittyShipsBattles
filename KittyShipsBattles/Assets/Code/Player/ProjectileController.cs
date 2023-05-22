@@ -36,63 +36,63 @@ internal class ProjectileController : MonoBehaviour
     {
        
 
-        // Get mouse position in world coordinates
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //// Get mouse position in world coordinates
+        //Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        // Detect mouse button press and start dragging
-        if (Input.GetMouseButtonDown(0))
-        {
-            initialMousePosition = mousePosition;
-            isDragging = true;
-            mouseDownTime = Time.time;
-        }
-        // Detect mouse button release and shoot projectile
-        else if (Input.GetMouseButtonUp(0) && isDragging)
-        {
-            float clickDuration = Time.time - mouseDownTime;
-            //Vector3 mouseUpPosition = Input.mousePosition;
-            Vector3 clickedWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            clickedWorldPosition.z = 0;
+        //// Detect mouse button press and start dragging
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    initialMousePosition = mousePosition;
+        //    isDragging = true;
+        //    mouseDownTime = Time.time;
+        //}
+        //// Detect mouse button release and shoot projectile
+        //else if (Input.GetMouseButtonUp(0) && isDragging)
+        //{
+        //    float clickDuration = Time.time - mouseDownTime;
+        //    //Vector3 mouseUpPosition = Input.mousePosition;
+        //    Vector3 clickedWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        //    clickedWorldPosition.z = 0;
 
-            float dragDistance = Vector2.Distance(initialMousePosition, clickedWorldPosition);
-            float initialSpeed = CalculateShootingPower(dragDistance);
+        //    float dragDistance = Vector2.Distance(initialMousePosition, clickedWorldPosition);
+        //    float initialSpeed = CalculateShootingPower(dragDistance);
 
-            //Debug.Log("mouseDownTime: " + mouseDownTime);
-            //Debug.Log("Time.time: " + Time.time);
-            //Debug.Log("clickDuration: " + clickDuration);
-            //Debug.Log("drag distance: " + dragDistance);
-            //Debug.Log("minDragDistance " + minDragDistance);
+        //    //Debug.Log("mouseDownTime: " + mouseDownTime);
+        //    //Debug.Log("Time.time: " + Time.time);
+        //    //Debug.Log("clickDuration: " + clickDuration);
+        //    //Debug.Log("drag distance: " + dragDistance);
+        //    //Debug.Log("minDragDistance " + minDragDistance);
 
-            // Get mouse position in world coordinates
-            Vector3 viewportPosition = mainCamera.WorldToViewportPoint(clickedWorldPosition);
+        //    // Get mouse position in world coordinates
+        //    Vector3 viewportPosition = mainCamera.WorldToViewportPoint(clickedWorldPosition);
 
-            //Debug.Log("Distance between start point and last point of the mouse: " + Vector2.Distance(initialMousePosition, mousePosition));
-            //Debug.Log("max Distance: " + maxDistance);
-            //Debug.Log("shootingPower: " + shootingPower);
-            //Debug.Log("Mathf.Lerp of initialSpeed: " + initialSpeed);
+        //    //Debug.Log("Distance between start point and last point of the mouse: " + Vector2.Distance(initialMousePosition, mousePosition));
+        //    //Debug.Log("max Distance: " + maxDistance);
+        //    //Debug.Log("shootingPower: " + shootingPower);
+        //    //Debug.Log("Mathf.Lerp of initialSpeed: " + initialSpeed);
 
-            if (clickDuration < maxClickDuration && dragDistance < minDragDistance &&
-            viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1)
-            {
-                Debug.Log("Entering?");
-                // Move player to the clicked position
-                selectedPlayer.MovePlayer(clickedWorldPosition);
-            }
-            else
-            {
-                // Shoot the projectile
-                ShootProjectile(clickedWorldPosition, initialSpeed);
-            }
+        //    if (clickDuration < maxClickDuration && dragDistance < minDragDistance &&
+        //    viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1)
+        //    {
+        //        Debug.Log("Entering?");
+        //        // Move player to the clicked position
+        //        selectedPlayer.MovePlayer(clickedWorldPosition);
+        //    }
+        //    else
+        //    {
+        //        // Shoot the projectile
+        //        ShootProjectile(clickedWorldPosition, initialSpeed);
+        //    }
 
-            isDragging = false;
-            trajectoryLine.EndLine();
-        }
+        //    isDragging = false;
+        //    trajectoryLine.EndLine();
+        //}
 
-        if (Input.GetMouseButton(0))
-        {
-            Vector3 currentPoint = mousePosition;
-            trajectoryLine.RenderLine(initialMousePosition, mousePosition);
-        }
+        //if (Input.GetMouseButton(0))
+        //{
+        //    Vector3 currentPoint = mousePosition;
+        //    trajectoryLine.RenderLine(initialMousePosition, mousePosition);
+        //}
     }
 
     internal float CalculateShootingPower(float dragDistance)
