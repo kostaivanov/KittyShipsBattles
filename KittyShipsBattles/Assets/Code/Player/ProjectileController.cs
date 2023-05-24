@@ -12,24 +12,7 @@ internal class ProjectileController : MonoBehaviour
     [SerializeField] private float maxInitialSpeed;
     [SerializeField] private float maxDistance;
     [SerializeField] private Vector2 gravity = new Vector2(0, -9.81f);
-    private Vector3 initialMousePosition;
     private Vector2 velocity;
-    private bool isDragging = false;
-
-    private TrajectoryLine trajectoryLine;
-
-    private List<PlayerMovement> playerMovements;
-    private PlayerMovement selectedPlayer;
-    private Camera mainCamera;
-    private float mouseDownTime;
-    [SerializeField] private float maxClickDuration; // Maximum time the mouse button can be held down for a click to be registered
-    [SerializeField] private float minDragDistance; // Maximum time the mouse button can be held down for a click to be registered
-
-    private void Start()
-    {
-        mainCamera = Camera.main;
-        trajectoryLine = GetComponent<TrajectoryLine>();
-    }
 
 
     void Update()
@@ -103,7 +86,7 @@ internal class ProjectileController : MonoBehaviour
         return initialSpeed;
     }
 
-    internal void ShootProjectile(Vector3 mouseUpPosition, float initialSpeed)
+    internal void ShootProjectile(Vector3 initialMousePosition, Vector3 mouseUpPosition, float initialSpeed)
     {
         // Calculate velocity based on the mouse movement direction
         velocity = (initialMousePosition - mouseUpPosition).normalized * initialSpeed;

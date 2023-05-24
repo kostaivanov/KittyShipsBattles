@@ -57,7 +57,7 @@ internal class PlayerShootingState : PlayerBaseState
                 else
                 {
                     // Shoot the projectile
-                    player.projectileController.ShootProjectile(clickedWorldPosition, initialSpeed);
+                    player.projectileController.ShootProjectile(player.initialMousePosition, clickedWorldPosition, initialSpeed);
                 }
 
                 player.isDragging = false;
