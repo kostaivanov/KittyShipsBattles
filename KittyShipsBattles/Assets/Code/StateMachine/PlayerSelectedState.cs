@@ -15,7 +15,7 @@ internal class PlayerSelectedState : PlayerBaseState
             {
                 player.selectedPlayer = player.playerMovements[0];
                 player.healthBar.SetActive(true);
-                player.SwitchState(player.shootingState);
+                player.SwitchState(player.moveOrShootState);
             }
 
         }
