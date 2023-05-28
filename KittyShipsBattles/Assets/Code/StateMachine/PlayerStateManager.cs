@@ -7,17 +7,6 @@ internal class PlayerStateManager : PlayerComponents
     internal Camera mainCamera;
     [SerializeField] internal GameObject healthBar;
 
-
-    #region Shooting/Moving variables
-    internal Vector3 initialMousePosition;
-
-    internal float mouseDownTime;
-    [SerializeField] internal float maxClickDuration; // Maximum time the mouse button can be held down for a click to be registered
-    [SerializeField] internal float minDragDistance; // Maximum time the mouse button can be held down for a click to be registered
-
-    internal bool isDragging = false;
-    #endregion
-
     internal TrajectoryLine trajectoryLine;
     internal ProjectileController projectileController;
 
