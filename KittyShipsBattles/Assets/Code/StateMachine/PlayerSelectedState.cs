@@ -35,7 +35,7 @@ internal class PlayerSelectedState : PlayerBaseState
                 if (Input.GetMouseButtonDown(0))
                 {
                     player.selectedPlayer = hitPlayer;
-                    player.SwitchState(player.shootingState);
+                    player.SwitchState(player.moveOrShootState);
                     Debug.Log("selectedPlayer = " + player.selectedPlayer.name);
                 }
             }
