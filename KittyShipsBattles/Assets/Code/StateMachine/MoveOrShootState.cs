@@ -57,7 +57,7 @@ internal class MoveOrShootState : PlayerBaseState
                 else
                 {
                     // Shoot the projectile
-                    player.SwitchState(player.shootingState);
+                    //player.SwitchState(player.shootingState);
                     player.projectileController.ShootProjectile(player.initialMousePosition, clickedWorldPosition, initialSpeed);
 
                 }
