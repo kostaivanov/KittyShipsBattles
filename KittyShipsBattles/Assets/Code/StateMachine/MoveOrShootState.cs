@@ -7,13 +7,10 @@ internal class MoveOrShootState : PlayerBaseState
     #region Shooting/Moving variables
     internal Vector3 initialMousePosition;
 
-    internal float mouseDownTime;
-    internal float maxClickDuration = 0.1f; // Maximum time the mouse button can be held down for a click to be registered
-    internal float minDragDistance = 0.5f; // Maximum time the mouse button can be held down for a click to be registered
+    //internal float mouseDownTime;
 
-    internal bool isDragging = false;
-    private const float dragDelay = 0.05f;
-    private float dragStartTime;
+    internal float dragThreshold = 0.5f; // Minimum distance the mouse needs to be dragged to be considered a drag
+
     #endregion
 
     internal override void EnterState(PlayerStateManager player)
@@ -30,15 +27,13 @@ internal class MoveOrShootState : PlayerBaseState
             if (Input.GetMouseButtonDown(0))
             {
                 initialMousePosition = mousePosition;
-                isDragging = false;
-                mouseDownTime = Time.time;
-                dragStartTime = Time.time;
+                //mouseDownTime = Time.time;
             }
 
             // Detect mouse button release and shoot projectile
-            else if (Input.GetMouseButtonUp(0) && isDragging)
+            else if (Input.GetMouseButtonUp(0))
             {
-                float clickDuration = Time.time - mouseDownTime;
+                //float clickDuration = Time.time - mouseDownTime;
                 //Vector3 mouseUpPosition = Input.mousePosition;
                 Vector3 clickedWorldPosition = player.mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 clickedWorldPosition.z = 0;
@@ -60,45 +55,26 @@ internal class MoveOrShootState : PlayerBaseState
                 //Debug.Log("shootingPower: " + shootingPower);
                 //Debug.Log("Mathf.Lerp of initialSpeed: " + initialSpeed);
 
-
-                if (isDragging)
+                if (viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1)
                 {
-                    // Shoot the projectile
-                    player.projectileController.ShootProjectile(initialMousePosition, clickedWorldPosition, initialSpeed);
-                }
-                else if(clickDuration < maxClickDuration && dragDistance < minDragDistance &&
-                viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1)
-                {
-                    // Move player to the clicked position
-                    player.selectedPlayer.MovePlayer(clickedWorldPosition);
-                }
+                    Debug.Log("drag distance - " + dragDistance);
+                    if (dragDistance > dragThreshold)
+                    {
+                        player.projectileController.ShootProjectile(initialMousePosition, clickedWorldPosition, initialSpeed);
+                    }
+                    else
+                    {
+                        player.selectedPlayer.MovePlayer(clickedWorldPosition);
+                    }
+                }             
 
-                //if (clickDuration < maxClickDuration && dragDistance < minDragDistance &&
-                //viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1)
-                //{
-                //    // Move player to the clicked position
-                //    player.selectedPlayer.MovePlayer(clickedWorldPosition);
-                //}
-                //else
-                //{
-
-                //}
-
-                isDragging = false;
                 player.trajectoryLine.EndLine();
             }
 
             if (Input.GetMouseButton(0))
             {
-                if (!isDragging && Time.time - dragStartTime >= dragDelay)
-                {
-                    isDragging = true;
-                }
-                if (isDragging)
-                {
-                    Vector3 currentPoint = mousePosition;
-                    player.trajectoryLine.RenderLine(initialMousePosition, mousePosition);
-                }
+                Vector3 currentPoint = mousePosition;
+                player.trajectoryLine.RenderLine(initialMousePosition, mousePosition);
             }
         }
     }
