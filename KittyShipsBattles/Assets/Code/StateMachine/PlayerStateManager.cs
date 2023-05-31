@@ -20,6 +20,7 @@ internal class PlayerStateManager : PlayerComponents
 
     //internal PlayerMovement playerMovement;
     internal List<PlayerMovement> playerMovements;
+    internal List<PlayerStateManager> playerStateManagers;
     internal PlayerMovement selectedPlayer;
 
     // Start is called before the first frame update
@@ -34,11 +35,13 @@ internal class PlayerStateManager : PlayerComponents
 
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
         playerMovements = new List<PlayerMovement>();
+        playerStateManagers = new List<PlayerStateManager>();
 
         foreach (var playerObject in playerObjects)
         {
             playerMovements.Add(playerObject.GetComponent<PlayerMovement>());
-            Debug.Log("playerMovements = " + playerMovements.Count);
+            playerStateManagers.Add(playerObject.GetComponent<PlayerStateManager>());
+            //Debug.Log("playerMovements = " + playerMovements.Count);
         }        
 
         currentState = selectedState;
@@ -49,7 +52,7 @@ internal class PlayerStateManager : PlayerComponents
     void Update()
     {      
         currentState.UpdateState(this);
-        Debug.Log("We play? = " + currentState);
+        //Debug.Log("We play? = " + currentState);
     }
 
     internal void SwitchState(PlayerBaseState state)

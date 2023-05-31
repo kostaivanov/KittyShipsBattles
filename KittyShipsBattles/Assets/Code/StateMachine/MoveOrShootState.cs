@@ -57,7 +57,7 @@ internal class MoveOrShootState : PlayerBaseState
 
                 if (viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1)
                 {
-                    Debug.Log("drag distance - " + dragDistance);
+                    //Debug.Log("drag distance - " + dragDistance);
                     if (dragDistance > dragThreshold)
                     {
                         player.projectileController.ShootProjectile(initialMousePosition, clickedWorldPosition, initialSpeed);

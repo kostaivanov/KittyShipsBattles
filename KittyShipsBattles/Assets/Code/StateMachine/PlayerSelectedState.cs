@@ -35,8 +35,19 @@ internal class PlayerSelectedState : PlayerBaseState
                 if (Input.GetMouseButtonDown(0))
                 {
                     player.selectedPlayer = hitPlayer;
+                    Debug.Log("player.playerStateManagers count = " + player.playerStateManagers.Count);
+
+
+                    foreach (PlayerStateManager p in player.playerStateManagers)
+                    {
+                        Debug.Log("selectedPlayer = " + p.name);
+                        if (p.name != player.selectedPlayer.name)
+                        {
+                            p.SwitchState(p.selectedState);
+                            p.healthBar.SetActive(false);
+                        }
+                    }
                     player.SwitchState(player.moveOrShootState);
-                    Debug.Log("selectedPlayer = " + player.selectedPlayer.name);
                 }
             }
             else
