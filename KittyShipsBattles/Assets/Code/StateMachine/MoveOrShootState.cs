@@ -15,14 +15,15 @@ internal class MoveOrShootState : PlayerBaseState
 
     internal override void EnterState(PlayerStateManager player)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Entered the Move or shoot state!");
     }
 
     internal override void UpdateState(PlayerStateManager player)
     {
+        Debug.Log("Update the Move or shoot state!");
         // Get mouse position in world coordinates
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (player.selectedPlayer.name == player.gameObject.name)
+        if (player.selectedPlayer.name == player.gameObject.name && player.selectedState.selected == true)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -73,7 +74,7 @@ internal class MoveOrShootState : PlayerBaseState
 
             if (Input.GetMouseButton(0))
             {
-                Vector3 currentPoint = mousePosition;
+                //Vector3 currentPoint = mousePosition;
                 player.trajectoryLine.RenderLine(initialMousePosition, mousePosition);
             }
         }

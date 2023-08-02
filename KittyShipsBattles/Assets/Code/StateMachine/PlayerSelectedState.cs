@@ -4,13 +4,12 @@ using UnityEngine;
 
 internal class PlayerSelectedState : PlayerBaseState
 {
-
- 
-
+    internal bool selected;
     internal override void EnterState(PlayerStateManager player)
     {
         if (player.playerMovements.Count > 0)
         {
+            selected = true;
             if (player.gameObject.name == player.playerMovements[0].gameObject.name)
             {
                 player.selectedPlayer = player.playerMovements[0];
@@ -35,16 +34,18 @@ internal class PlayerSelectedState : PlayerBaseState
                 if (Input.GetMouseButtonDown(0))
                 {
                     player.selectedPlayer = hitPlayer;
+                    Debug.Log("player = " + player.selectedPlayer.name);
                     Debug.Log("player.playerStateManagers count = " + player.playerStateManagers.Count);
 
 
                     foreach (PlayerStateManager p in player.playerStateManagers)
                     {
-                        Debug.Log("selectedPlayer = " + p.name);
+                        //Debug.Log("selectedPlayer = " + p.name);
                         if (p.name != player.selectedPlayer.name)
                         {
                             p.SwitchState(p.selectedState);
                             p.healthBar.SetActive(false);
+                            p.selectedState.selected = false;
                         }
                     }
                     player.SwitchState(player.moveOrShootState);
