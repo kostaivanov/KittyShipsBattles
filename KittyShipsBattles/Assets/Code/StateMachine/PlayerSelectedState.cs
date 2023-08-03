@@ -35,7 +35,7 @@ internal class PlayerSelectedState : PlayerBaseState
                 {
                     player.selectedPlayer = hitPlayer;
                     Debug.Log("player = " + player.selectedPlayer.name);
-                    Debug.Log("player.playerStateManagers count = " + player.playerStateManagers.Count);
+                    //Debug.Log("player.playerStateManagers count = " + player.playerStateManagers.Count);
 
 
                     foreach (PlayerStateManager p in player.playerStateManagers)
@@ -43,12 +43,16 @@ internal class PlayerSelectedState : PlayerBaseState
                         //Debug.Log("selectedPlayer = " + p.name);
                         if (p.name != player.selectedPlayer.name)
                         {
+                            //Debug.Log("Hello - " + p.name);
                             p.SwitchState(p.selectedState);
                             p.healthBar.SetActive(false);
                             p.selectedState.selected = false;
                         }
+                        else if(p.name == player.selectedPlayer.name)
+                        {
+                            p.SwitchState(p.moveOrShootState);
+                        }
                     }
-                    player.SwitchState(player.moveOrShootState);
                 }
             }
             else

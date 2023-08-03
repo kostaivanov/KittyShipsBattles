@@ -52,7 +52,7 @@ internal class PlayerStateManager : PlayerComponents
     void Update()
     {      
         currentState.UpdateState(this);
-        //Debug.Log("We play? = " + currentState);
+        //Debug.Log($"{this.gameObject.name} is at current state = " + currentState);
     }
 
     internal void SwitchState(PlayerBaseState state)
