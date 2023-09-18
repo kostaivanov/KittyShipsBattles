@@ -24,7 +24,7 @@ internal class PlayerSelectedState : PlayerBaseState
     {
         //Handle player seleciton and highlighting
         RaycastHit2D hit = Physics2D.Raycast(player.mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        if (hit.collider != null)
+        if (hit.collider != null && hit.collider.gameObject.tag == "Player")
         {
             PlayerMovement hitPlayer = hit.collider.GetComponent<PlayerMovement>();
             if (hitPlayer != null)
@@ -36,7 +36,6 @@ internal class PlayerSelectedState : PlayerBaseState
                     player.selectedPlayer = hitPlayer;
                     Debug.Log("player = " + player.selectedPlayer.name);
                     //Debug.Log("player.playerStateManagers count = " + player.playerStateManagers.Count);
-
 
                     foreach (PlayerStateManager p in player.playerStateManagers)
                     {
