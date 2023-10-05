@@ -16,7 +16,6 @@ internal class PlayerStateManager : PlayerComponents
     internal PlayerSelectedState selectedState = new PlayerSelectedState();
     internal PlayerMovingState movingState = new PlayerMovingState();
     internal PlayerShootingState shootingState = new PlayerShootingState();
-    internal PlayerDraggingState draggingState = new PlayerDraggingState();
 
     //internal PlayerMovement playerMovement;
     internal List<PlayerMovement> playerMovements;
