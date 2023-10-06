@@ -15,7 +15,7 @@ internal class MoveOrShootState : PlayerBaseState
 
     internal override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Entered the Move or shoot state! - " + player.gameObject.name);
+        //Debug.Log("Entered the Move or shoot state! - " + player.gameObject.name);
     }
 
     internal override void UpdateState(PlayerStateManager player)

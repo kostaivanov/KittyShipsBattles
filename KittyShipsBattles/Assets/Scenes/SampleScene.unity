@@ -343,6 +343,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship_L2
       objectReference: {fileID: 0}
+    - target: {fileID: 5982727304974120646, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
 --- !u!1 &519420028
@@ -438,8 +442,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 638511072}
+  - component: {fileID: 638511073}
   m_Layer: 0
-  m_Name: asd
+  m_Name: RaycastingObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -460,6 +465,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &638511073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638511071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2167230c9ff91e46abd3578aae8cc82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overlapLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &828408503
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,6 +881,10 @@ PrefabInstance:
     - target: {fileID: 5982727304974120646, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
       propertyPath: m_Name
       value: Ship_L3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982727304974120646, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
@@ -1432,6 +1456,10 @@ PrefabInstance:
     - target: {fileID: 5982727304974120646, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
       propertyPath: m_Name
       value: Ship_L1_Main
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982727304974120646, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88d5d3231be85594cb4ca34107ad3731, type: 3}
