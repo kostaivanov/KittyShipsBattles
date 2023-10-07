@@ -20,10 +20,10 @@ internal class Projectile : MonoBehaviour
         gravity = gravityVector;
     }
 
-    internal void SetShootingPlayer(GameObject player)
-    {
-        shootingPlayer = player;
-    }
+    //internal void SetShootingPlayer(GameObject player)
+    //{
+    //    shootingPlayer = player;
+    //}
 
     void Update()
     {

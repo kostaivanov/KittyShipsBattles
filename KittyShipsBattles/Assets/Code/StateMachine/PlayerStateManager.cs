@@ -14,6 +14,8 @@ internal class PlayerStateManager : PlayerComponents
 
     internal MoveOrShootState moveOrShootState = new MoveOrShootState();
     internal PlayerSelectedState selectedState = new PlayerSelectedState();
+    internal PlayerIdleState idleState = new PlayerIdleState();
+
     internal PlayerMovingState movingState = new PlayerMovingState();
     internal PlayerShootingState shootingState = new PlayerShootingState();
 
@@ -43,7 +45,7 @@ internal class PlayerStateManager : PlayerComponents
             //Debug.Log("playerMovements = " + playerMovements.Count);
         }        
 
-        currentState = selectedState;
+        currentState = idleState;
         currentState.EnterState(this);
     }
 

@@ -4,70 +4,59 @@ using UnityEngine;
 
 internal class PlayerSelectedState : PlayerBaseState
 {
-    internal bool selected;
+    internal Vector3 initialMousePosition;
+    internal float dragThreshold = 0.5f; // Minimum distance the mouse needs to be dragged to be considered a drag
+
     internal override void EnterState(PlayerStateManager player)
     {
-        if (player.playerMovements.Count > 0)
-        {
-            selected = true;
-            if (player.gameObject.name == player.playerMovements[0].gameObject.name)
-            {
-                player.selectedPlayer = player.playerMovements[0];
-                player.healthBar.SetActive(true);
-                player.SwitchState(player.moveOrShootState);
-            }
-
-        }
+        
     }
 
     internal override void UpdateState(PlayerStateManager player)
     {
-        //Handle player seleciton and highlighting
-        //RaycastHit2D hit = Physics2D.Raycast(player.mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        //if (hit.collider != null && hit.collider.gameObject.tag == "Player")
-        //{
-        //    PlayerMovement hitPlayer = hit.collider.GetComponent<PlayerMovement>();
-        //    if (hitPlayer != null)
-        //    {
-        //        hitPlayer.Sethighlight(true);
+        // Get mouse position in world coordinates
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (player.selectedPlayer.name == player.gameObject.name && player.idleState.selected == true)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                initialMousePosition = mousePosition;
+            }
 
-        //        if (Input.GetMouseButtonDown(0))
-        //        {
-        //            player.selectedPlayer = hitPlayer;
-        //            //Debug.Log("player = " + player.selectedPlayer.name);
-        //            //Debug.Log("player.playerStateManagers count = " + player.playerStateManagers.Count);
+            // Detect mouse button release and shoot projectile
+            else if (Input.GetMouseButtonUp(0))
+            {
+                Vector3 clickedWorldPosition = player.mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                clickedWorldPosition.z = 0;
 
-        //            foreach (PlayerStateManager p in player.playerStateManagers)
-        //            {
-        //                //Debug.Log("selectedPlayer = " + p.name);
-        //                if (p.name != player.selectedPlayer.name)
-        //                {
-        //                    //Debug.Log("Hello - " + p.name);
-        //                    p.SwitchState(p.selectedState);
-        //                    p.healthBar.SetActive(false);
-        //                    p.selectedState.selected = false;
-        //                }
-        //                else if(p.name == player.selectedPlayer.name)
-        //                {
-        //                    p.SwitchState(p.moveOrShootState);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        foreach (var _player in player.playerMovements)
-        //        {
-        //            _player.Sethighlight(false);
-        //        }
-        //    }
-        //}
-        //else
-        //{
-        //    foreach (var _player in player.playerMovements)
-        //    {
-        //        _player.Sethighlight(false);
-        //    }
-        //}
+                float dragDistance = Vector2.Distance(initialMousePosition, clickedWorldPosition);
+
+
+                // Get mouse position in world coordinates
+                Vector3 viewportPosition = player.mainCamera.WorldToViewportPoint(clickedWorldPosition);
+
+                if (viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1)
+                {
+                    //Debug.Log("drag distance - " + dragDistance);
+                    if (dragDistance > dragThreshold)
+                    {
+                        player.SwitchState(player.shootingState);
+                    }
+                    else
+                    {
+                        player.SwitchState(player.movingState);
+                        player.selectedPlayer.MovePlayer(clickedWorldPosition);
+                    }
+                }
+
+                player.trajectoryLine.EndLine();
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                //Vector3 currentPoint = mousePosition;
+                player.trajectoryLine.RenderLine(initialMousePosition, mousePosition);
+            }
+        }
     }
 }

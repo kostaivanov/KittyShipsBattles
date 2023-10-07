@@ -11,7 +11,10 @@ internal class PlayerShootingState : PlayerBaseState
 
     internal override void UpdateState(PlayerStateManager player)
     {
-        // Shoot the projectile
-        //player.projectileController.ShootProjectile(player.initialMousePosition, clickedWorldPosition, initialSpeed);
+        //float dragDistance = Vector2.Distance(initialMousePosition, clickedWorldPosition);
+
+        //float initialSpeed = player.projectileController.CalculateShootingPower(player.selectedPlayer.dragDistance);
+        //player.projectileController.ShootProjectile(initialMousePosition, clickedWorldPosition, initialSpeed);
+
     }
 }

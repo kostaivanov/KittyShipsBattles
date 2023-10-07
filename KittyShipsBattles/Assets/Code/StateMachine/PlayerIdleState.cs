@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : MonoBehaviour
+internal class PlayerIdleState : PlayerBaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    internal bool selected;
+
+    internal override void EnterState(PlayerStateManager player)
     {
-        
+        if (player.playerMovements.Count > 0)
+        {
+            selected = true;
+            if (player.gameObject.name == player.playerMovements[0].gameObject.name)
+            {
+                player.selectedPlayer = player.playerMovements[0];
+                player.healthBar.SetActive(true);
+                player.SwitchState(player.selectedState);
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    internal override void UpdateState(PlayerStateManager player)
     {
-        
+        throw new System.NotImplementedException();
     }
 }
