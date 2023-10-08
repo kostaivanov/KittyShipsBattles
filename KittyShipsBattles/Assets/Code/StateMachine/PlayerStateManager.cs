@@ -9,6 +9,7 @@ internal class PlayerStateManager : PlayerComponents
 
     internal TrajectoryLine trajectoryLine;
     internal ProjectileController projectileController;
+    internal MouseInputManager mouseInputManager;
 
     internal PlayerBaseState currentState;
 
@@ -31,6 +32,7 @@ internal class PlayerStateManager : PlayerComponents
         mainCamera = Camera.main;
         trajectoryLine = GetComponent<TrajectoryLine>();
         projectileController = GetComponent<ProjectileController>();
+        mouseInputManager = GetComponent<MouseInputManager>();
 
         healthBar.SetActive(false);
 

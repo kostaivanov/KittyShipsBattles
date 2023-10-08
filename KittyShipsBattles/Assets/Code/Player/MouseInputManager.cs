@@ -6,6 +6,8 @@ internal class MouseInputManager : MonoBehaviour
 {
     internal const float dragThreshold = 0.5f; // Minimum distance the mouse needs to be dragged to be considered a drag
     internal Vector3 initialMousePosition;
+    internal float dragDistance;
+    internal Vector3 clickedWorldPosition;
 
     internal int isDragging(PlayerStateManager player)
     {
@@ -19,11 +21,10 @@ internal class MouseInputManager : MonoBehaviour
         // Detect mouse button release and shoot projectile
         else if (Input.GetMouseButtonUp(0))
         {
-            Vector3 clickedWorldPosition = player.mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            clickedWorldPosition = player.mainCamera.ScreenToWorldPoint(Input.mousePosition);
             clickedWorldPosition.z = 0;
 
-            float dragDistance = Vector2.Distance(initialMousePosition, clickedWorldPosition);
-            float initialSpeed = player.projectileController.CalculateShootingPower(dragDistance);
+            dragDistance = Vector2.Distance(initialMousePosition, clickedWorldPosition);
 
             // Get mouse position in world coordinates
             Vector3 viewportPosition = player.mainCamera.WorldToViewportPoint(clickedWorldPosition);
@@ -40,7 +41,6 @@ internal class MouseInputManager : MonoBehaviour
                     return 0;
                 }
             }
-
             player.trajectoryLine.EndLine();
         }
 

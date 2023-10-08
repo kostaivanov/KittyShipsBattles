@@ -12,7 +12,9 @@ internal class PlayerMovingState : PlayerBaseState
     internal override void UpdateState(PlayerStateManager player)
     {
         Debug.Log("Entering update?");
+
         // Move player to the clicked position
-        //player.selectedPlayer.MovePlayer(player.shootingState.clickedWorldPosition);
+        player.selectedPlayer.MovePlayer(player.mouseInputManager.clickedWorldPosition);
+        player.SwitchState(player.selectedState);
     }
 }
