@@ -10,6 +10,7 @@ internal class PlayerSelectedState : PlayerBaseState
     internal override void EnterState(PlayerStateManager player)
     {
         player.animator.Play("IDLE_P2");
+        Debug.Log("name played once this  = " + player.gameObject.name);
     }
 
     internal override void UpdateState(PlayerStateManager player)
