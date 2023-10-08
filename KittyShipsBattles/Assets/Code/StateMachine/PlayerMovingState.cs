@@ -15,6 +15,7 @@ internal class PlayerMovingState : PlayerBaseState
 
         // Move player to the clicked position
         player.selectedPlayer.MovePlayer(player.mouseInputManager.clickedWorldPosition);
+        player.animator.Play("Moving_P2");
         player.SwitchState(player.selectedState);
     }
 }

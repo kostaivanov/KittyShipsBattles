@@ -9,11 +9,12 @@ internal class PlayerSelectedState : PlayerBaseState
 
     internal override void EnterState(PlayerStateManager player)
     {
-        
+        player.animator.Play("IDLE_P2");
     }
 
     internal override void UpdateState(PlayerStateManager player)
     {
+        Debug.Log("name playing this update = " + player.gameObject.name);
         // Get mouse position in world coordinates
         if (player.selectedPlayer.name == player.gameObject.name && player.idleState.selected == true)
         {
