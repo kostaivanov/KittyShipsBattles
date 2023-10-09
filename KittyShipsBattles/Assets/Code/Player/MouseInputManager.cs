@@ -8,13 +8,19 @@ internal class MouseInputManager : MonoBehaviour
     internal Vector3 initialMousePosition;
     internal float dragDistance;
     internal Vector3 clickedWorldPosition;
+    internal Vector2 mousePosition;
+
+    private void Update()
+    {
+    }
 
     internal int isDragging(PlayerStateManager player)
     {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetMouseButtonDown(0))
         {
+            dragDistance = -1;
             initialMousePosition = mousePosition;
         }
 
@@ -41,7 +47,6 @@ internal class MouseInputManager : MonoBehaviour
                     return 0;
                 }
             }
-            player.trajectoryLine.EndLine();
         }
 
         if (Input.GetMouseButton(0))
@@ -51,5 +56,6 @@ internal class MouseInputManager : MonoBehaviour
         }
 
         return -1;
+
     }
 }
