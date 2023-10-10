@@ -13,7 +13,6 @@ internal class PlayerStateManager : PlayerComponents
 
     internal PlayerBaseState currentState;
 
-    internal MoveOrShootState moveOrShootState = new MoveOrShootState();
     internal PlayerSelectedState selectedState = new PlayerSelectedState();
     internal PlayerIdleState idleState = new PlayerIdleState();
 
@@ -55,7 +54,7 @@ internal class PlayerStateManager : PlayerComponents
     void Update()
     {      
         currentState.UpdateState(this);
-        Debug.Log(mouseInputManager.isDragging(this) + " - " + this.gameObject.name);
+        //Debug.Log(mouseInputManager.isDragging(this) + " - " + this.gameObject.name);
 
         //Debug.Log($"{this.gameObject.name} is at current state = " + currentState);
     }

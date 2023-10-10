@@ -5,6 +5,8 @@ using UnityEngine;
 internal class MouseInputManager : MonoBehaviour
 {
     internal const float dragThreshold = 0.5f; // Minimum distance the mouse needs to be dragged to be considered a drag
+    [SerializeField] LayerMask overlapLayer;
+
     internal Vector3 initialMousePosition;
     internal float dragDistance;
     internal Vector3 clickedWorldPosition;

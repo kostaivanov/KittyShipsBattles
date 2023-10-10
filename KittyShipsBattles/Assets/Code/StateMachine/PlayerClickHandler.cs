@@ -24,7 +24,7 @@ public class PlayerClickHandler : MonoBehaviour
                 PlayerStateManager player = hit.GetComponent<PlayerStateManager>();
                 if (player != null)
                 {
-                    player.SwitchState(player.movingState);
+                    player.SwitchState(player.selectedState);
                     Debug.Log("I am clicked!");
                 }
             }
