@@ -30,6 +30,10 @@ internal class PlayerMovement : PlayerComponents
         //    transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         //}
     }
+    private void Update()
+    {
+        Debug.Log(playerRigidBody.velocity.magnitude);
+    }
 
     private IEnumerator MoveToTarget(Vector3 targetPosition)
     {

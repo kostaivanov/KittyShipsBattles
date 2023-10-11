@@ -56,7 +56,7 @@ internal class PlayerStateManager : PlayerComponents
         currentState.UpdateState(this);
         //Debug.Log(mouseInputManager.isDragging(this) + " - " + this.gameObject.name);
 
-        //Debug.Log($"{this.gameObject.name} is at current state = " + currentState);
+        Debug.Log($"{this.gameObject.name} is at current state = " + currentState);
     }
 
     internal void SwitchState(PlayerBaseState state)

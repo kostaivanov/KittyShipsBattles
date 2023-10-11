@@ -5,6 +5,7 @@ using UnityEngine;
 internal abstract class PlayerComponents : MonoBehaviour
 {
     internal Collider2D playerCollider2D;
+    internal Rigidbody2D playerRigidBody;
     internal Animator animator;
     internal SpriteRenderer sprite;
 
@@ -12,6 +13,7 @@ internal abstract class PlayerComponents : MonoBehaviour
     internal virtual void Start()
     {
         playerCollider2D = GetComponent<Collider2D>();
+        playerRigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         sprite = GetComponent<SpriteRenderer>();
     }
