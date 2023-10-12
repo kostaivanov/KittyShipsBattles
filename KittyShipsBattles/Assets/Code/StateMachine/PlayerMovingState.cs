@@ -5,7 +5,7 @@ using UnityEngine;
 internal class PlayerMovingState : PlayerBaseState
 {
     private bool isMoving = false;
-    public const float movementThreshold = 0.2f;
+    public const float movementThreshold = 0.1f;
     private Vector3 previousPosition;
 
     internal override void EnterState(PlayerStateManager player)
@@ -14,7 +14,6 @@ internal class PlayerMovingState : PlayerBaseState
         player.animator.Play("Moving_P2");
         isMoving = true;
         previousPosition = player.gameObject.transform.position;
-        Debug.Log("previousPosition = " + previousPosition);
     }
 
     internal override void UpdateState(PlayerStateManager player)
@@ -24,13 +23,12 @@ internal class PlayerMovingState : PlayerBaseState
 
 
         Vector3 positionChange = player.gameObject.transform.position - previousPosition;
-        Debug.Log("Entering positionChange - " + positionChange);
         player.trajectoryLine.EndLine();
-        if (positionChange.magnitude < movementThreshold)
+        if (player.gameObject.transform.position.Equals(previousPosition))
         {
-            Debug.Log("Entering 2 ?");
             player.SwitchState(player.selectedState);
             isMoving = false;
         }
+        previousPosition = player.gameObject.transform.position;
     }
 }
