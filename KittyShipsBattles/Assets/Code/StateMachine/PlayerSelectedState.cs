@@ -17,14 +17,14 @@ internal class PlayerSelectedState : PlayerBaseState
             //Debug.Log("selectedPlayer = " + p.name);
             if (p.name != player.selectedPlayer.name)
             {
-                p.SwitchState(p.idleState);
-                p.healthBar.SetActive(false);
+                //p.SwitchState(p.idleState);
+                //p.healthBar.SetActive(false);
                 ////p.selectedState.selected = false;
             }
             else if (p.name == player.selectedPlayer.name)
             {
-                player.selectedPlayer = player.GetComponent<PlayerMovement>();
-                player.SwitchState(player.selectedState);
+                //player.selectedPlayer = player.GetComponent<PlayerMovement>();
+                //player.SwitchState(player.selectedState);
             }
         }
         //Debug.Log("name played once this  = " + player.gameObject.name);
