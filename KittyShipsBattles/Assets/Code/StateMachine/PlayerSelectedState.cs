@@ -23,8 +23,8 @@ internal class PlayerSelectedState : PlayerBaseState
             }
             else if (p.name == player.selectedPlayer.name)
             {
-                //player.selectedPlayer = player.GetComponent<PlayerMovement>();
-                //player.SwitchState(player.selectedState);
+                player.selectedPlayer = player.GetComponent<PlayerMovement>();
+                player.SwitchState(player.selectedState);
             }
         }
         //Debug.Log("name played once this  = " + player.gameObject.name);

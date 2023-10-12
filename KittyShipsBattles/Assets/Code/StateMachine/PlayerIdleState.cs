@@ -8,7 +8,7 @@ internal class PlayerIdleState : PlayerBaseState
 
     internal override void EnterState(PlayerStateManager player)
     {
-        if (player.playerMovements.Count > 0)
+        if (player.playerMovements != null && player.playerMovements.Count > 0)
         {
             selected = true;
             if (player.gameObject.name == player.playerMovements[0].gameObject.name)
