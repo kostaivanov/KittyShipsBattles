@@ -15,7 +15,6 @@ internal class PlayerStateManager : PlayerComponents
 
     internal PlayerSelectedState selectedState = new PlayerSelectedState();
     internal PlayerIdleState idleState = new PlayerIdleState();
-
     internal PlayerMovingState movingState = new PlayerMovingState();
     internal PlayerShootingState shootingState = new PlayerShootingState();
 
@@ -32,7 +31,7 @@ internal class PlayerStateManager : PlayerComponents
         trajectoryLine = GetComponent<TrajectoryLine>();
         projectileController = GetComponent<ProjectileController>();
         mouseInputManager = GetComponent<MouseInputManager>();
-
+        selectedPlayer = GetComponent<PlayerMovement>();
         healthBar.SetActive(false);
 
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");

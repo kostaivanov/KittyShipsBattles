@@ -22,6 +22,6 @@ internal class PlayerIdleState : PlayerBaseState
 
     internal override void UpdateState(PlayerStateManager player)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerClickHandler : MonoBehaviour
 {
     [SerializeField] LayerMask overlapLayer;
+    [SerializeField] internal List<PlayerStateManager> playerStateManagers;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,14 @@ public class PlayerClickHandler : MonoBehaviour
                 PlayerStateManager player = hit.GetComponent<PlayerStateManager>();
                 if (player != null)
                 {
+                    foreach (PlayerStateManager p in playerStateManagers)
+                    {
+                        if (p.currentState != p.idleState)
+                        {
+                            p.SwitchState(p.idleState);
+                        }
+                    }
+
                     player.SwitchState(player.selectedState);
                     Debug.Log("I am clicked!");
                 }
