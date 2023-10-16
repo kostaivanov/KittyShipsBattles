@@ -10,8 +10,8 @@ internal class PlayerSelectedState : PlayerBaseState
     internal override void EnterState(PlayerStateManager player)
     {
         player.animator.Play("IDLE_P2");
-        Debug.Log("Hello - ");
-
+        //Debug.Log("Hello - ");
+        player.mouseInputManager.dragDistance = -1;
 
         //foreach (PlayerStateManager p in player.playerStateManagers)
         //{

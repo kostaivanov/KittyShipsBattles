@@ -4,7 +4,7 @@ using UnityEngine;
 
 internal class PlayerMovingState : PlayerBaseState
 {
-    private bool isMoving = false;
+    internal bool isMoving = false;
     public const float movementThreshold = 0.1f;
     private Vector3 previousPosition;
 
@@ -13,7 +13,9 @@ internal class PlayerMovingState : PlayerBaseState
 
         player.animator.Play("Moving_P2");
         isMoving = true;
-        previousPosition = player.gameObject.transform.position;
+        player.mouseInputManager.allowedToShoot = false;
+
+        //previousPosition = player.gameObject.transform.position;
     }
 
     internal override void UpdateState(PlayerStateManager player)
@@ -26,7 +28,10 @@ internal class PlayerMovingState : PlayerBaseState
         player.trajectoryLine.EndLine();
         if (player.gameObject.transform.position.Equals(previousPosition))
         {
+            player.mouseInputManager.dragDistance = -1;
             player.SwitchState(player.selectedState);
+            player.mouseInputManager.allowedToShoot = true;
+            player.mouseInputManager.initialMousePosition = player.gameObject.transform.position;
             isMoving = false;
         }
         previousPosition = player.gameObject.transform.position;

@@ -28,10 +28,8 @@ public class PlayerClickHandler : MonoBehaviour
                 {
                     foreach (PlayerStateManager p in playerStateManagers)
                     {
-                        if (p.currentState != p.idleState)
-                        {
-                            p.SwitchState(p.idleState);
-                        }
+                        p.SwitchState(p.idleState);
+                        p.trajectoryLine.EndLine();
                     }
 
                     player.SwitchState(player.selectedState);

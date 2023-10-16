@@ -5,6 +5,9 @@ using UnityEngine;
 internal class PlayerStateManager : PlayerComponents
 {
     internal Camera mainCamera;
+    [SerializeField] internal int playerId;
+    internal int countSelection;
+
     [SerializeField] internal GameObject healthBar;
 
     internal TrajectoryLine trajectoryLine;
@@ -27,6 +30,7 @@ internal class PlayerStateManager : PlayerComponents
     internal override void Start()
     {
         base.Start();
+        countSelection = 0;
         mainCamera = Camera.main;
         trajectoryLine = GetComponent<TrajectoryLine>();
         projectileController = GetComponent<ProjectileController>();
@@ -55,7 +59,7 @@ internal class PlayerStateManager : PlayerComponents
         currentState.UpdateState(this);
         //Debug.Log(mouseInputManager.isDragging(this) + " - " + this.gameObject.name);
 
-        Debug.Log($"{this.gameObject.name} is at current state = " + currentState);
+        //Debug.Log($"{this.gameObject.name} is at current state = " + currentState);
     }
 
     internal void SwitchState(PlayerBaseState state)
