@@ -19,42 +19,47 @@ internal class MouseInputManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (allowedToShoot)
-            {
-                dragDistance = -1;
-                initialMousePosition = mousePosition;
-            }
+            //if (allowedToShoot)
+            //{
+                dragDistance = 0f;               
+            //}
+            initialMousePosition = mousePosition;
             Debug.Log("initial mouse pos = " + initialMousePosition);
         }
 
         // Detect mouse button release and shoot projectile
-        else if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
-            if (allowedToShoot)
-            {
+            //if (allowedToShoot)
+            //{
                 clickedWorldPosition = player.mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 clickedWorldPosition.z = 0;
+            Debug.Log("clickedWorldPosition = " + clickedWorldPosition);
 
-                dragDistance = Vector2.Distance(initialMousePosition, clickedWorldPosition);
+            dragDistance = Vector2.Distance(initialMousePosition, clickedWorldPosition);
+            Debug.Log("dragDistance = " + dragDistance);
 
-                // Get mouse position in world coordinates
-                Vector3 viewportPosition = player.mainCamera.WorldToViewportPoint(clickedWorldPosition);
+            // Get mouse position in world coordinates
+            Vector3 viewportPosition = player.mainCamera.WorldToViewportPoint(clickedWorldPosition);
 
                 if (viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1)
                 {
                     //Debug.Log("drag distance - " + dragDistance);
                     if (dragDistance > dragThreshold)
                     {
-                        // 1 equals dragging for shooting
+                    // 1 equals dragging for shooting
+                    dragDistance = 0f;
                         return 1;
                     }
                     else
                     {
-                        // 0 equals just clicking for moving
-                        return 0;
+                    // 0 equals just clicking for moving
+                    dragDistance = 0f;
+
+                    return 0;
                     }
                 }
-            }
+            //}
             
         }
 
@@ -62,7 +67,7 @@ internal class MouseInputManager : MonoBehaviour
         {
             //Vector3 currentPoint = mousePosition;
             player.trajectoryLine.RenderLine(initialMousePosition, mousePosition);
-            Debug.Log("initial mouse pos = " + initialMousePosition);
+            //Debug.Log("initial mouse pos = " + initialMousePosition);
 
         }
         
