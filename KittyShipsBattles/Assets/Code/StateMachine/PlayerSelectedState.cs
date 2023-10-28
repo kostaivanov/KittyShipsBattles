@@ -35,7 +35,8 @@ internal class PlayerSelectedState : PlayerBaseState
     {
         //Debug.Log("name playing this update = " + player.gameObject.name);
         // Get mouse position in world coordinates
-        if (player.selectedPlayer.name == player.gameObject.name && player.idleState.selected == true)
+        // && player.idleState.selected == true
+        if (player.selectedPlayer.name == player.gameObject.name)
         {
             MouseInputManager mouseInputManager = player.GetComponent<MouseInputManager>();
             //Debug.Log("drag distance - " + dragDistance);

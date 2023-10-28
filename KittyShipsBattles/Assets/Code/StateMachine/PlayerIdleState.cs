@@ -4,13 +4,13 @@ using UnityEngine;
 
 internal class PlayerIdleState : PlayerBaseState
 {
-    internal bool selected;
+    //internal bool selected;
 
     internal override void EnterState(PlayerStateManager player)
     {
         if (player.playerMovements != null && player.playerMovements.Count > 0)
         {
-            selected = true;
+            //selected = true;
             if (player.gameObject.name == player.playerMovements[0].gameObject.name && player.countSelection == 0)
             {
                 player.countSelection += 1;
