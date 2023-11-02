@@ -13,22 +13,6 @@ internal class PlayerSelectedState : PlayerBaseState
         //Debug.Log("Hello - ");
         player.mouseInputManager.dragDistance = -1;
 
-        //foreach (PlayerStateManager p in player.playerStateManagers)
-        //{
-        //    //Debug.Log("selectedPlayer = " + p.name);
-        //    if (p.name != player.selectedPlayer.name)
-        //    {
-        //        //p.SwitchState(p.idleState);
-        //        //p.healthBar.SetActive(false);
-        //        ////p.selectedState.selected = false;
-        //    }
-        //    else if (p.name == player.selectedPlayer.name)
-        //    {
-        //        //player.selectedPlayer = player.GetComponent<PlayerMovement>();
-        //        //player.SwitchState(player.selectedState);
-        //    }
-        //}
-        //Debug.Log("name played once this  = " + player.gameObject.name);
     }
 
     internal override void UpdateState(PlayerStateManager player)
@@ -38,14 +22,21 @@ internal class PlayerSelectedState : PlayerBaseState
         // && player.idleState.selected == true
         if (player.selectedPlayer.name == player.gameObject.name)
         {
-            MouseInputManager mouseInputManager = player.GetComponent<MouseInputManager>();
+            player.mouseInputManager.allowedToShoot = true;
+
+            //int dragResult = player.mouseInputManager.isDragging(player);
+            //MouseInputManager mouseInputManager = player.GetComponent<MouseInputManager>();
+            player.mouseInputManager.dragDistance = -1;
             //Debug.Log("drag distance - " + dragDistance);
-            if (mouseInputManager.isDragging(player) == 1)
+            if (player.mouseInputManager.isDragging(player) && Input.GetMouseButtonUp(0))
             {
+                Debug.Log("choose shooting");
+                player.mouseInputManager.allowedToShoot = false; // Disallow shooting until the next mouse release
                 player.SwitchState(player.shootingState);
             }
-            else if(mouseInputManager.isDragging(player) == 0)
+            else if(!player.mouseInputManager.isDragging(player) && Input.GetMouseButtonUp(0))
             {
+                Debug.Log("choose Moving");
                 player.SwitchState(player.movingState);
             }              
         }

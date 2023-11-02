@@ -22,12 +22,9 @@ internal class PlayerMovingState : PlayerBaseState
         // Move player to the clicked position
         player.selectedPlayer.MovePlayer(player.mouseInputManager.clickedWorldPosition);
 
-        MouseInputManager mouseInputManager = player.GetComponent<MouseInputManager>();
 
-        if (mouseInputManager.isDragging(player) == 0)
+        if (player.mouseInputManager.isDragging(player))
         {
-            Debug.Log("we are in moving stage here");
-
             player.selectedPlayer.MovePlayer(player.mouseInputManager.clickedWorldPosition);
         }
 
@@ -40,6 +37,7 @@ internal class PlayerMovingState : PlayerBaseState
             //player.mouseInputManager.allowedToShoot = true;
             player.mouseInputManager.initialMousePosition = player.gameObject.transform.position;
             isMoving = false;
+            Debug.Log("we are exiting moving stage here");
         }
         previousPosition = player.gameObject.transform.position;
 

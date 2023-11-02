@@ -12,65 +12,78 @@ internal class MouseInputManager : MonoBehaviour
     internal Vector3 clickedWorldPosition;
     internal Vector2 mousePosition;
 
-    internal int isDragging(PlayerStateManager player)
+    internal bool isMouseDown = false;
+    internal bool isMouseDragging = false;
+    internal bool shouldShoot = false;
+
+
+
+    internal bool isDragging(PlayerStateManager player)
     {
 
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        player.mouseInputManager.mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetMouseButtonDown(0))
         {
+            isMouseDown = true;
+            isMouseDragging = false;
+            shouldShoot = false;
             //if (allowedToShoot)
             //{
-                dragDistance = 0f;               
+            player.mouseInputManager.dragDistance = 0f;
             //}
-            initialMousePosition = mousePosition;
-            Debug.Log("initial mouse pos = " + initialMousePosition);
+            player.mouseInputManager.initialMousePosition = player.mouseInputManager.mousePosition;
+            //Debug.Log("initial mouse pos = " + player.mouseInputManager.initialMousePosition);
         }
 
         // Detect mouse button release and shoot projectile
-        if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))
         {
+            isMouseDown = false;
             //if (allowedToShoot)
             //{
-                clickedWorldPosition = player.mainCamera.ScreenToWorldPoint(Input.mousePosition);
-                clickedWorldPosition.z = 0;
-            Debug.Log("clickedWorldPosition = " + clickedWorldPosition);
+            player.mouseInputManager.clickedWorldPosition = player.mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            player.mouseInputManager.clickedWorldPosition.z = 0;
+            //Debug.Log("clickedWorldPosition = " + clickedWorldPosition);
 
-            dragDistance = Vector2.Distance(initialMousePosition, clickedWorldPosition);
-            Debug.Log("dragDistance = " + dragDistance);
+            player.mouseInputManager.dragDistance = Vector2.Distance(player.mouseInputManager.initialMousePosition, player.mouseInputManager.clickedWorldPosition);
+            //Debug.Log("dragDistance = " + player.mouseInputManager.dragDistance);
 
             // Get mouse position in world coordinates
             Vector3 viewportPosition = player.mainCamera.WorldToViewportPoint(clickedWorldPosition);
 
-                if (viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1)
+            if (viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1)
+            {
+                if (isMouseDragging)
                 {
-                    //Debug.Log("drag distance - " + dragDistance);
-                    if (dragDistance > dragThreshold)
-                    {
-                    // 1 equals dragging for shooting
-                    dragDistance = 0f;
-                        return 1;
-                    }
-                    else
-                    {
-                    // 0 equals just clicking for moving
-                    dragDistance = 0f;
-
-                    return 0;
-                    }
+                    shouldShoot = true;
                 }
+
+                isMouseDragging = false;
+            }
             //}
-            
+
         }
 
-        if (Input.GetMouseButton(0) && player.currentState != player.movingState)
+        if (isMouseDown == true && Input.GetMouseButton(0) && player.currentState != player.movingState)
         {
+            if (player.mouseInputManager.dragDistance > dragThreshold)
+            {
+                isMouseDragging = true;
+                player.trajectoryLine.RenderLine(initialMousePosition, mousePosition);
+                return true;
+            }
             //Vector3 currentPoint = mousePosition;
-            player.trajectoryLine.RenderLine(initialMousePosition, mousePosition);
-            //Debug.Log("initial mouse pos = " + initialMousePosition);
 
+            //Debug.Log("initial mouse pos = " + initialMousePosition);
         }
-        
-        return -1;
+        return false;
+        //return -1;
     }
+
+    //private void Update()
+    //{
+    //    Debug.Log(this.gameObject.name + " is dragging  = " + isDragging(GetComponent<PlayerStateManager>()));
+
+    //}
 }
