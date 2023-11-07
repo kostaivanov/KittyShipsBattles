@@ -36,10 +36,14 @@ internal class MouseInputManager : MonoBehaviour
             //Debug.Log("initial mouse pos = " + player.mouseInputManager.initialMousePosition);
         }
 
-        // Detect mouse button release and shoot projectile
-        else if (Input.GetMouseButtonUp(0))
+        if (isMouseDown && player.mouseInputManager.dragDistance > dragThreshold)
         {
-            isMouseDown = false;
+            isMouseDragging = true;
+        }
+
+        // Detect mouse button release and shoot projectile
+        if (Input.GetMouseButtonUp(0))
+        {
             //if (allowedToShoot)
             //{
             player.mouseInputManager.clickedWorldPosition = player.mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -58,32 +62,24 @@ internal class MouseInputManager : MonoBehaviour
                 {
                     shouldShoot = true;
                 }
-
+                isMouseDown = false;
                 isMouseDragging = false;
+                //}
+
             }
-            //}
 
-        }
-
-        if (isMouseDown == true && Input.GetMouseButton(0) && player.currentState != player.movingState)
-        {
-            if (player.mouseInputManager.dragDistance > dragThreshold)
+            if (isMouseDragging)
             {
-                isMouseDragging = true;
                 player.trajectoryLine.RenderLine(initialMousePosition, mousePosition);
-                return true;
             }
-            //Vector3 currentPoint = mousePosition;
 
-            //Debug.Log("initial mouse pos = " + initialMousePosition);
+            //return -1;
         }
         return false;
-        //return -1;
+        //private void Update()
+        //{
+        //    Debug.Log(this.gameObject.name + " is dragging  = " + isDragging(GetComponent<PlayerStateManager>()));
+
+        //}
     }
-
-    //private void Update()
-    //{
-    //    Debug.Log(this.gameObject.name + " is dragging  = " + isDragging(GetComponent<PlayerStateManager>()));
-
-    //}
 }

@@ -28,17 +28,19 @@ internal class PlayerSelectedState : PlayerBaseState
             //MouseInputManager mouseInputManager = player.GetComponent<MouseInputManager>();
             player.mouseInputManager.dragDistance = -1;
             //Debug.Log("drag distance - " + dragDistance);
-            if (player.mouseInputManager.isDragging(player) && Input.GetMouseButtonUp(0))
+            player.mouseInputManager.isDragging(player);
+
+
+            if (player.mouseInputManager.shouldShoot)
             {
                 Debug.Log("choose shooting");
-                player.mouseInputManager.allowedToShoot = false; // Disallow shooting until the next mouse release
                 player.SwitchState(player.shootingState);
             }
-            else if(!player.mouseInputManager.isDragging(player) && Input.GetMouseButtonUp(0))
+            else if (!player.mouseInputManager.isMouseDown)
             {
                 Debug.Log("choose Moving");
                 player.SwitchState(player.movingState);
-            }              
+            }
         }
     }
 }
