@@ -23,7 +23,7 @@ internal class PlayerMovingState : PlayerBaseState
         player.selectedPlayer.MovePlayer(player.mouseInputManager.clickedWorldPosition);
 
 
-        if (player.mouseInputManager.isDragging(player))
+        if (player.mouseInputManager.isDragging())
         {
             player.selectedPlayer.MovePlayer(player.mouseInputManager.clickedWorldPosition);
         }

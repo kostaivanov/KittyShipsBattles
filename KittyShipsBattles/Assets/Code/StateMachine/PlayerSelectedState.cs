@@ -22,23 +22,16 @@ internal class PlayerSelectedState : PlayerBaseState
         // && player.idleState.selected == true
         if (player.selectedPlayer.name == player.gameObject.name)
         {
-            player.mouseInputManager.allowedToShoot = true;
+            MouseInputManager mouseInputManager = player.GetComponent<MouseInputManager>();
 
-            //int dragResult = player.mouseInputManager.isDragging(player);
-            //MouseInputManager mouseInputManager = player.GetComponent<MouseInputManager>();
-            player.mouseInputManager.dragDistance = -1;
-            //Debug.Log("drag distance - " + dragDistance);
-            player.mouseInputManager.isDragging(player);
-
-
-            if (player.mouseInputManager.shouldShoot)
+            if (mouseInputManager.isDragging())
             {
-                Debug.Log("choose shooting");
+                // When dragging, switch to shooting state
                 player.SwitchState(player.shootingState);
             }
-            else if (!player.mouseInputManager.isMouseDown)
+            else if (mouseInputManager.hasClicked)
             {
-                Debug.Log("choose Moving");
+                // When a click is detected (without dragging), switch to moving state
                 player.SwitchState(player.movingState);
             }
         }
