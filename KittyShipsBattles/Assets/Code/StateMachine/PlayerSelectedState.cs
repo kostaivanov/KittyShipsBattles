@@ -27,11 +27,13 @@ internal class PlayerSelectedState : PlayerBaseState
             if (mouseInputManager.isDragging())
             {
                 // When dragging, switch to shooting state
+                Debug.Log("isDragging yesss");
                 player.SwitchState(player.shootingState);
             }
             else if (mouseInputManager.hasClicked)
             {
                 // When a click is detected (without dragging), switch to moving state
+                Debug.Log("isDragging NOOO");
                 player.SwitchState(player.movingState);
             }
         }
