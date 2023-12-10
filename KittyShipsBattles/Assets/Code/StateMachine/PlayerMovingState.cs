@@ -32,7 +32,7 @@ internal class PlayerMovingState : PlayerBaseState
         player.trajectoryLine.EndLine();
         if (player.gameObject.transform.position.Equals(previousPosition))
         {
-            player.mouseInputManager.dragDistance = -1;
+            player.mouseInputManager.dragDistance = 0;
             player.SwitchState(player.selectedState);
             //player.mouseInputManager.allowedToShoot = true;
             player.mouseInputManager.initialMousePosition = player.gameObject.transform.position;

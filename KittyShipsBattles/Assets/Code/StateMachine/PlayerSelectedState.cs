@@ -11,7 +11,7 @@ internal class PlayerSelectedState : PlayerBaseState
     {
         player.animator.Play("IDLE_P2");
         //Debug.Log("Hello - ");
-        player.mouseInputManager.dragDistance = -1;
+        player.mouseInputManager.dragDistance = 0;
 
     }
 
@@ -24,16 +24,19 @@ internal class PlayerSelectedState : PlayerBaseState
         {
             MouseInputManager mouseInputManager = player.GetComponent<MouseInputManager>();
 
+            
             if (mouseInputManager.isDragging())
             {
                 // When dragging, switch to shooting state
                 Debug.Log("isDragging yesss");
+                mouseInputManager.isMouseDragging = false;
                 player.SwitchState(player.shootingState);
             }
-            else if (mouseInputManager.hasClicked)
+            else if (!mouseInputManager.isDragging() && mouseInputManager.hasClicked == true)
             {
                 // When a click is detected (without dragging), switch to moving state
                 Debug.Log("isDragging NOOO");
+                mouseInputManager.hasClicked = false;
                 player.SwitchState(player.movingState);
             }
         }
